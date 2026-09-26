@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=600, height=600, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="A simple video library player for Meta Ray-Ban Display.">
+    <meta name="application-name" content="Ray-Ban Video">
+    <meta name="mrbd-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <title>Ray-Ban Video</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAA+UlEQVR42u3bwRVFMBBG4ZRhoRH9N6AZaw5LCzIxzPxxFyngfsd7SEYppaw/XwAAAAAAAAAAQNCalvkfAHuodckDtEQHYOQO/wBCI/xFCL14ZwTNeEcE3XgnBO14BwSh3/w4HMsZQSv+CqARQSv+DqABIfG9/hQeDpAhvgbAiJAP4Co+DCBDuAXAgJADoDa+SwBLfAhAlnArQCVCDEBrfBcAT+KlAZ6GSwN4xUsCeMZ/DpAt3gpQgcAVwH8AdwGeA3gS5F2At0H2A9gRYk+QXWHOBTgZ4myQ02HmA5gQYUaIKTHmBJkUZVaYaXG+F+CLEQAAAAAAAHpfG0EGcZ6lWXYQAAAAAElFTkSuQmCC">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell" aria-label="Ray-Ban video player">
+      <header class="status-bar">
+        <div>
+          <p class="eyebrow">NOW PLAYING</p>
+          <h1 id="video-title">Choose a video</h1>
+        </div>
+        <span id="position-label" class="position-label">--:-- / --:--</span>
+      </header>
+
+      <section class="player-frame" aria-label="Video">
+        <video id="video" playsinline preload="metadata"></video>
+        <div id="empty-state" class="empty-state">
+          <span class="empty-icon" aria-hidden="true">▶</span>
+          <p>Open the list to choose a video</p>
+        </div>
+        <div id="message" class="message" role="status" aria-live="polite"></div>
+      </section>
+
+      <div class="progress-track" aria-hidden="true">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+
+      <nav class="controls" aria-label="Playback controls">
+        <button id="play-button" class="control focusable" type="button" data-action="play">
+          <span class="control-icon" aria-hidden="true">▶</span>
+          <span>Play</span>
+        </button>
+        <button id="next-button" class="control focusable" type="button" data-action="next">
+          <span class="control-icon" aria-hidden="true">⏭</span>
+          <span>Next</span>
+        </button>
+        <button id="pause-button" class="control focusable" type="button" data-action="pause">
+          <span class="control-icon" aria-hidden="true">Ⅱ</span>
+          <span>Pause</span>
+        </button>
+        <button id="list-button" class="control focusable" type="button" data-action="list">
+          <span class="control-icon" aria-hidden="true">☰</span>
+          <span>List</span>
+        </button>
+        <button id="settings-button" class="control focusable" type="button" data-action="settings">
+          <span class="control-icon" aria-hidden="true">⚙</span>
+          <span>Settings</span>
+        </button>
+      </nav>
+    </main>
+
+    <dialog id="library-dialog" class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">VIDEO LIBRARY</p>
+          <h2 id="folder-title">Movies</h2>
+        </div>
+        <button class="icon-button focusable" type="button" data-close="library-dialog" aria-label="Close video list">✕</button>
+      </div>
+      <div id="library-grid" class="library-grid" aria-live="polite"></div>
+      <div class="panel-footer">
+        <button id="folder-up-button" class="footer-button focusable" type="button">↑ Up</button>
+        <button id="previous-page-button" class="footer-button focusable" type="button">← Page</button>
+        <span id="page-label" class="page-label">1 / 1</span>
+        <button id="next-page-button" class="footer-button focusable" type="button">Page →</button>
+      </div>
+    </dialog>
+
+    <dialog id="settings-dialog" class="panel settings-panel">
+      <div class="panel-header">
+        <div>
+          <p class="eyebrow">PLAYER</p>
+          <h2>Settings</h2>
+        </div>
+        <button class="icon-button focusable" type="button" data-close="settings-dialog" aria-label="Close settings">✕</button>
+      </div>
+      <form id="settings-form">
+        <label>
+          Listing API
+          <input id="api-url" class="focusable" type="url" required>
+        </label>
+        <label>
+          Media base URL
+          <input id="media-url" class="focusable" type="url" required>
+        </label>
+        <label>
+          Password
+          <input id="api-password" class="focusable" type="password" required>
+        </label>
+        <label class="toggle-row">
+          <input id="autoplay-next" class="focusable" type="checkbox">
+          <span>Play next video automatically</span>
+        </label>
+        <div class="settings-actions">
+          <button class="footer-button focusable" type="button" id="reset-settings">Reset</button>
+          <button class="footer-button primary focusable" type="submit">Save</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
